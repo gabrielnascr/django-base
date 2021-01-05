@@ -12,6 +12,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'src.core'
 ]
 
 MIDDLEWARE = [
@@ -56,3 +57,29 @@ TIME_ZONE = config('TIME_ZONE', default='UTC')
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+SECRET_KEY = config('SECRET_KEY', default='secret')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*')
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'
+    }
+]
+
+STATIC_URL = config('STATIC_URL', default='/static/')
+
+STATIC_ROOT = BASE_DIR.child('public')
+
+STATICFILES_DIRS = [
+    BASE_DIR.child('core', 'static'),
+]
