@@ -3,10 +3,12 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %} {% endblock title%} </title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Hello World</h1>
+    {% block content %} {% endblock content %}
+
+    <script type="text/javascript" src="{% static 'js/index.js'%}"></script>
 </body>
 </html>

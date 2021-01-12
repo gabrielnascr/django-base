@@ -1,8 +1,9 @@
+import os
 from pathlib import Path
 from decouple import config
-from unipath import Path
 
-BASE_DIR = Path(__file__).ancestor(2)
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 INSTALLED_APPS = [
@@ -12,7 +13,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'src.core'
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -25,8 +26,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'src.urls'
-WSGI_APPLICATION = 'src.wsgi.application'
+ROOT_URLCONF = 'boilerplate.urls'
+WSGI_APPLICATION = 'boilerplate.wsgi.application'
+ASGI_APPLICATION = 'boilerplate.asgi.application'
 
 TEMPLATES = [
     {
@@ -76,10 +78,5 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
-STATIC_URL = config('STATIC_URL', default='/static/')
-
-STATIC_ROOT = BASE_DIR.child('public')
-
-STATICFILES_DIRS = [
-    BASE_DIR.child('core', 'static'),
-]
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'core/static')
